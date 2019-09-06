@@ -1,0 +1,17 @@
+<html>
+    <head>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <title>database list</title>
+    </head>
+    <body>
+        <script>
+            $(document).ready(function(){
+                $.get('/databaselist', function(result, status){
+                    result.forEach(database => {
+                        
+                    });
+                })
+            });
+        </script>
+    </body>
+</html>

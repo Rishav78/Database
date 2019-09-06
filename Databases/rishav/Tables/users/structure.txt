@@ -1,0 +1,1 @@
+{"type":"create","table":1,"name":"users","columns":[{"name":"\"id\"","type":"int"},{"name":"firstname","type":"string"},{"name":"lastname","type":"string"},{"name":"dob","type":"time"}]}

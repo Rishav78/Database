@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>query page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <style>
+            body{
+                padding: 0;
+                margin: 0;
+                height: 100vh;
+            }
+            .container{
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            .query > textarea{
+                width: 100%;
+                height: 300px;
+                font-size: 20px;
+                color: #333;
+            }
+            .result{
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="query">
+                <textarea id="query" placeholder="enter query here"></textarea>
+            </div>
+            <div class="result"></div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $('#query').keydown(function(e){
+                    if(e.keyCode !== 81) return;
+                    let {value} = this;
+                    $.post(`/query${location.search}`, {query: this.value}, function(result, status){
+                        console.log(result);
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>
