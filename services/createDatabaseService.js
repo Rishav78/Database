@@ -9,12 +9,12 @@ const exists = util.promisify(fs.exists),
 async function createDatabase(req, res) {
     const databasename = req.body.databasename.toLowerCase();
     const location = path.join(__dirname, '..', 'Databases', databasename);
-    const info = {name: databasename,table: [], index: [],};
+    const info = {name: databasename, table: [], sequence: 0};
     if(await exists(location))
         return res.json({success: false, msg: "database already exist"});
     await mkdir(location);
     await writeFile(path.join(location, 'info.txt'),JSON.stringify(info));
-    await appendFile(path.join(__dirname, '..', 'Databases', 'databases.txt'), JSON.stringify(info))
+    await appendFile(path.join(__dirname, '..', 'Databases', 'databases.txt'), JSON.stringify(info)+',\n')
     return res.redirect('/databaselist');
 }
 

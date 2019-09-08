@@ -1,1 +1,0 @@
-{"type":"create","table":1,"name":"rishav","columns":[{"name":"\"id\"","type":"int"},{"name":"\"name\"","type":"string"},{"name":"\"lastname\"","type":"string"}]}

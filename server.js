@@ -2,7 +2,7 @@ const express = require('express'),
     app = express(),
     bodyParser = require('body-parser'),
     session = require('express-session'),
-    port = 3000;
+    port = 4000;
 
 
 app.set('view engine', 'ejs');

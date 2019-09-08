@@ -5,7 +5,7 @@ module.exports = (queryString, queryObject) => {
     if(index===-1) throw new Error('invalid query');
 
     while(queryString[i]!== '(' && queryString[i]!== ' ') table+=queryString[i++];
-    queryObject.table = table;
+    queryObject.table = table.toUpperCase();
 
     i=queryString.indexOf('(')+1;
     while(queryString[i]!== ')') columns+=queryString[i++];
@@ -19,9 +19,28 @@ module.exports = (queryString, queryObject) => {
     while(queryString[i]!== ')') values+=queryString[i++];
     values = values.split(',');
 
+    if(values.length!=columns.length)
+        throw new Error('invalid number of arguments');
+
     let newRow = {};
     for(let j=0;j<columns.length;j++) {
-        newRow[columns[j].trim()] = values[j].replace(/"/g,'').trim();
+        let value = convertDatatype(values[j].trim());
+        let column = columns[j].trim().toUpperCase();
+        newRow[column] = value;
     }
     queryObject.newRow = newRow;
+}
+
+
+function convertDatatype(value) {
+    if(value === 'null')
+        return null;
+    else if(value[0] === '"')
+        return value.replace(/"/g, '');
+    else if(value[0] === '{')
+        return JSON.parse(value);
+    else if(value[0] === '[') 
+        return JSON.parse(`{array: ${value}}`).array;
+    else 
+        return parseInt(value);
 }

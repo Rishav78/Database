@@ -7,5 +7,5 @@ module.exports = (queryString, queryObject) => {
     for(let i=0;i<selectedColumns.length;i++)
         selectedColumns[i] = selectedColumns[i].trim();
     queryObject.selectedColumns = selectedColumns;
-    queryObject.table = queryString.substr(end+5).trim();
+    queryObject.table = queryString.substr(end+5).toUpperCase().trim();
 }
