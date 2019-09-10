@@ -17,7 +17,7 @@ async function insert(req, res, query) {
         throw new Error("invalid insert type");
 
     query.newRow.ID = await getAndUpdateSequence(location);
-    await appendFile(path.join(location, 'Tables', query.table, 'records', 'index.txt'), JSON.stringify(query.newRow)+',\n')
+    await appendFile(path.join(location, 'Tables', query.table, 'records', 'index.txt'), JSON.stringify(query.newRow)+',')
     return res.json({success: true});
 }
 

@@ -15,7 +15,7 @@ async function createDatabase(req, res) {
     await mkdir(location);
     await writeFile(path.join(location, 'info.txt'),JSON.stringify(info));
     await appendFile(path.join(__dirname, '..', 'Databases', 'databases.txt'), JSON.stringify(info)+',\n')
-    return res.redirect('/databaselist');
+    return res.redirect(`/query/?d=${databasename}`);
 }
 
 module.exports = {

@@ -21,6 +21,8 @@ function executeQuery(req, res) {
         services.del.del(req, res, queryObject);
     else if(queryObject.type === 'drop')
         services.drop.drop(req, res, queryObject);
+    else if(queryObject.type === 'update')
+        services.update.update(req, res, queryObject);
     else
         throw new Error('invalid query');
 }

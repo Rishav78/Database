@@ -9,7 +9,7 @@ module.exports = (queryString, queryObject) => {
     selectedColumns = selectedColumns === '*' ? [] : selectedColumns.split(',');
 
     for(let j=0;j<selectedColumns.length;j++)
-        selectedColumns[j] = selectedColumns[j].trim();
+        selectedColumns[j] = selectedColumns[j].trim().toUpperCase();
     queryObject.selectedColumns = selectedColumns;
 
     let table = '';i=i+5;

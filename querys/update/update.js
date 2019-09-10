@@ -3,7 +3,7 @@ module.exports = (queryString, queryObject) => {
         name='';
     let dupQueryString = queryString.toLowerCase().trim();
     while(dupQueryString[i] !==' ') name += dupQueryString[i++];
-    queryObject.table = name;
+    queryObject.table = name.toUpperCase();
 
     let set = dupQueryString.indexOf('set');
     let where = dupQueryString.indexOf('where');
@@ -14,12 +14,26 @@ module.exports = (queryString, queryObject) => {
     for(let i=0;i<newValues.length;i++) {
         let column = newValues[i].split('=');
         columns.push({
-            column: column[0].trim(),
-            value: column[1].trim(),
+            column: column[0].trim().toUpperCase(),
+            value: convertDatatype(column[1].trim()),
         })
     }
     queryObject.newValues = columns;
     // if(where!=-1){
 
     // }
+}
+
+
+function convertDatatype(value) {
+    if(value === 'null')
+        return null;
+    else if(value[0] === '"')
+        return value.replace(/"/g, '');
+    else if(value[0] === '{')
+        return JSON.parse(value);
+    else if(value[0] === '[') 
+        return JSON.parse(`{array: ${value}}`).array;
+    else 
+        return parseInt(value);
 }
