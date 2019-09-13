@@ -1,4 +1,5 @@
 const join = require('./join/join');
+const where = require('../where/where');
 
 module.exports = (queryString, queryObject) => {
     const dupQueryString = queryString.toLowerCase();
@@ -15,7 +16,8 @@ module.exports = (queryString, queryObject) => {
     let table = '';i=i+5;
     while(queryString[i]!=' ' && i<queryString.length) table += queryString[i++];
     queryObject.table = table.toUpperCase().trim();
-
+    let w = dupQueryString.indexOf('where');
+    if(w!==-1) where(queryString.substr(w+6), queryObject);
     i = dupQueryString.indexOf('join');
     if(i!==-1)
         join(queryString.substr(i+4), queryObject);
